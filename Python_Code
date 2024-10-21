@@ -1,0 +1,72 @@
+
+#Installing and importing pip, pandas and pyplot
+
+Python3 get-pip.py
+pip3 install pandas
+pip3 install matplotlib.pyplot
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+# Count of movies and TV shows by date addded.
+
+#A dataframe was created using a csv file of netflix data. The 'date added' column was then converted into datetime for plotting along years.
+#Matplotlib was used to create a histogram of movies and shows added by year split into 20 bins. 
+
+netflix_df = pd.read_csv("netflix_data.csv") 
+
+netflix_df['date_added'] = pd.to_datetime(netflix_df['date_added'])
+
+plt.hist(netflix_df['date_added'], bins=20)
+plt.title('Count of Movies and TV Shows by Release Date')
+plt.xlabel('Year')
+plt.ylabel('Count of Additions')
+plt.show()
+
+
+# Count of Movies and TV Shows by Genre
+
+#An object was created of all unique entries in the 'genre' column of the dataframe. A seperate object was created to record the number of entries each genre had.
+
+genres = netflix_df['genre'].unique() 
+
+counts = netflix_df['genre'].value_counts()
+
+#Matplotlib was used to create a bar chart representing the count of movies and tv shows by genre.
+plt.bar(Genres,counts)
+plt.xlabel('Genre')
+plt.ylabel('Count of Movies/TV Shows')
+plt.xticks(Genres, rotation = 90)
+plt.show()
+
+
+
+# Action movies Durations in the 90s
+#An object was created containing netflix movies with a release date between 1990 and 2000. 
+#A second object was created to filter the 'filtered_dates' object to only contain action movies.
+
+filtered_dates = netflix_movies[(netflix_movies['release_year'] >= 1990) & (netflix_movies['release_year']<2000)]
+action_movies_1990s = filtered_dates[filtered_dates['genre'] == 'Action']
+
+#Three objects were created to hold the count of short,medium, and logn duration movies.
+#An if-elif  statement was iterated over the dataframe to count movies based on their length and update the 3 objects for duration. 
+short_duration_movie_count = 0
+medium_duration_movie_count = 0
+long_duration_movie_count = 0
+for index, movie in action_movies_1990s.iterrows():
+    if movie['duration'] < 90:
+       short_duration_movie_count = short_duration_movie_count + 1
+    elif movie['duration'] >= 90 and movie['duration'] <= 120:
+        medium_duration_movie_count = medium_duration_movie_count + 1
+    else:
+        long_duration_movie_count = long_length_movie_count + 1
+
+#Print was used to output a string concatenated with the short_duration_movie_count, medium_duration_movie_count, and long_duration_movie_count objects converted into strings.
+
+print('Short Duration Action Movies:' + str(short_duration_movie_count))
+print('Medium Duration Action Movies:' + str(medium_duration_movie_count))
+print('Long Duration Action Movies:' + str(long_duration_movie_count))
+
+
+
