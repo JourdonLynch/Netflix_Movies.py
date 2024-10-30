@@ -45,7 +45,6 @@ plt.xticks(genres, rotation = 90)
 plt.show()
 
 
-
 # Action movies Durations in the 90s
 # An object was created containing netflix movies with a release date between 1990 and 2000. 
 # A second object was created to filter the 'filtered_dates' object to only contain action movies.
